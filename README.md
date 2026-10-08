@@ -2,6 +2,10 @@
 
 Chapter & Co. is a polished React bookstore application built for a portfolio-ready e-commerce experience. Users can browse a realistic book catalogue, search and filter titles, view detailed book pages, manage a persistent cart, complete a validated checkout flow, and receive an order confirmation.
 
+## Problem Statement
+
+Build a frontend-only interactive bookstore where users can discover books, inspect detailed book information, manage a shopping cart, complete a validated checkout form, and receive a simulated order confirmation without using a backend, database, or payment processor.
+
 ## Features
 
 - Responsive home page with hero, featured books, categories, benefits, and call to action
@@ -21,6 +25,7 @@ Chapter & Co. is a polished React bookstore application built for a portfolio-re
 - JavaScript ES6+
 - React.js
 - React Router DOM
+- React Context API
 - Vite
 
 State management is implemented with React's built-in `useState`, `useEffect`, `useMemo`, Context API, props, and plain JavaScript helpers. No external state-management library is used.
@@ -74,9 +79,21 @@ npm run preview
 1. Push the project to GitHub.
 2. Create a new Vercel project from the GitHub repository.
 3. Use the default Vite settings:
+   - Framework Preset: `Vite`
+   - Root Directory: project root
+   - Install command: `npm install`
    - Build command: `npm run build`
    - Output directory: `dist`
+   - Environment variables: none required
 4. The included `vercel.json` rewrites all routes to `index.html` so React Router direct navigation works.
+
+## GitHub Repository
+
+Repository URL:
+
+```text
+https://github.com/kvsatyanarayana949/chapter-co-bookstore.git
+```
 
 ## Push To GitHub
 
@@ -85,7 +102,7 @@ git init
 git add .
 git commit -m "feat: build interactive bookstore app"
 git branch -M main
-git remote add origin https://github.com/your-username/your-repository.git
+git remote add origin https://github.com/kvsatyanarayana949/chapter-co-bookstore.git
 git push -u origin main
 ```
 
