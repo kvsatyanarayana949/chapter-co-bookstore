@@ -1,17 +1,26 @@
 import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookCard from '../components/BookCard.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import { useCart } from '../context/CartContext.jsx';
 import { books } from '../data/books.js';
-import { fallbackCover, formatPrice, getDiscountPercentage } from '../utils/helpers.js';
+import { calculateCart, fallbackCover, formatPrice, getDiscountPercentage } from '../utils/helpers.js';
 
 export default function BookDetails() {
   const { bookId } = useParams();
   const book = books.find((item) => item.id === bookId);
-  const { addToCart } = useCart();
+  const { addToCart, items } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [cartMessage, setCartMessage] = useState('');
+  const [shouldAnnounceCart, setShouldAnnounceCart] = useState(false);
+
+  useEffect(() => {
+    if (!shouldAnnounceCart) return;
+
+    const { itemCount } = calculateCart(items);
+    setCartMessage(`Your cart now has ${itemCount} ${itemCount === 1 ? 'item' : 'items'}.`);
+    setShouldAnnounceCart(false);
+  }, [items, shouldAnnounceCart]);
 
   if (!book) {
     return (
@@ -65,7 +74,7 @@ export default function BookDetails() {
               disabled={book.stock < 1}
               onClick={() => {
                 addToCart(book, quantity);
-                setCartMessage(`${quantity} ${quantity === 1 ? 'copy' : 'copies'} added to your cart.`);
+                setShouldAnnounceCart(true);
               }}
             >
               Add to Cart
